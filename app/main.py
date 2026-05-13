@@ -26,7 +26,7 @@ def shop_trip() -> None:
 
         print(f"{customer.name} has {customer.money} dollars")
 
-        best_cost = float('inf')
+        best_cost = float("inf")
         best_shop = None
 
         for shop_data in config["shops"]:
@@ -36,7 +36,9 @@ def shop_trip() -> None:
                 products=shop_data["products"]
             )
             trip_cost = round(customer.calculate_shopping_cost(shop), 2)
-            print(f"{customer.name}'s trip to the {shop.name} costs {trip_cost}")
+            print(
+                f"{customer.name}'s trip to the {shop.name} costs {trip_cost}"
+            )
 
             if trip_cost < best_cost and trip_cost <= customer.money:
                 best_cost = trip_cost
@@ -54,11 +56,15 @@ def shop_trip() -> None:
             for product, quantity in customer.product_cart.items():
                 if product in best_shop.products:
                     product_cost = best_shop.products[product] * quantity
-                    product_cost = int(product_cost) if product_cost == int(product_cost) else product_cost
+                    product_cost = int(product_cost) \
+                        if product_cost == int(product_cost)\
+                        else product_cost
                     print(f"{quantity} {product}s for {product_cost} dollars")
 
             total_cost = customer.calculate_products_cost(best_shop)
-            total_cost = int(total_cost) if total_cost == int(total_cost) else total_cost
+            total_cost = int(total_cost)\
+                if total_cost == int(total_cost)\
+                else total_cost
             print(f"Total cost is {total_cost} dollars")
             print("See you again!")
             print()
@@ -68,7 +74,10 @@ def shop_trip() -> None:
             final_money = round(customer.money, 2)
             print(f"{customer.name} now has {final_money} dollars")
         else:
-            print(f"{customer.name} doesn't have enough money to make a purchase in any shop")
+            print(
+                f"{customer.name} doesn't have enough "
+                f"money to make a purchase in any shop"
+            )
 
 
 if __name__ == "__main__":
